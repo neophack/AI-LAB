@@ -25,7 +25,6 @@ RUN apt-get -qq update && apt-get -qq install -y --no-install-recommends \
 	ssh \
 	ca-certificates \
 	curl \
-	cmake \
 	git \
 	wget \
 	unzip \
@@ -71,14 +70,22 @@ RUN cd /usr/local/src \
 
 RUN pip3 install --upgrade pip
 
-
+#---------------Install camke with SSL-------------
+ENV CMAKE_VERSION="3.15.5"
+RUN wget https://github.com/Kitware/CMake/releases/download/v${CMAKE_VERSION}/cmake-${CMAKE_VERSION}.tar.gz
+RUN tar zxvf cmake-${CMAKE_VERSION}.tar.gz && \
+    rm -rf cmake-${CMAKE_VERSION}.tar.gz && \
+    cd cmake-${CMAKE_VERSION} && \
+    ./bootstrap --system-curl && \
+    make && make install
+    
 #---------------Install opencv----------------------
 WORKDIR /
 ENV OPENCV_VERSION="3.4.8"
 RUN wget -O opencv.zip  https://github.com/opencv/opencv/archive/${OPENCV_VERSION}.zip
-#RUN wget -O opencv_contrib.zip https://github.com/opencv/opencv_contrib/archive/${OPENCV_VERSION}.zip
+RUN wget -O opencv_contrib.zip https://github.com/opencv/opencv_contrib/archive/${OPENCV_VERSION}.zip
 RUN unzip opencv.zip
-#RUN unzip opencv_contrib.zip
+RUN unzip opencv_contrib.zip
 RUN mkdir /opencv-${OPENCV_VERSION}/cmake_binary
 WORKDIR /opencv-${OPENCV_VERSION}/cmake_binary
 
@@ -117,11 +124,11 @@ RUN chmod +x download_with_curl.sh \
 RUN make -j8 \
 	&& make install 
 	
-RUN rm /opencv.zip 
-	#&& rm opencv_contrib.zip 
+RUN rm /opencv.zip \
+	&& rm /opencv_contrib.zip 
 	
-RUN rm -rf /opencv-${OPENCV_VERSION} 
-	#&& rm -rf /opencv_contrib-${OPENCV_VERSION}
+RUN rm -rf /opencv-${OPENCV_VERSION} \
+	&& rm -rf /opencv_contrib-${OPENCV_VERSION}
 
 RUN  ln -s \
 	/usr/lib/python3.6/dist-packages/cv2/python-3.6/cv2.cpython-36m-x86_64-linux-gnu.so \
@@ -174,6 +181,7 @@ RUN pip3 install --requirement /tmp/requirements.txt
 RUN pip3 install https://1dv.alarge.space/mxnet_cu101-1.6.0b20190820-py2.py3-none-manylinux1_x86_64.whl
 
 # install pycocotools
+RUN pip3 install cython
 RUN pip3 install 'git+https://github.com/RogerChern/cocoapi.git#subdirectory=PythonAPI'
 
 # install mxnext, a wrapper around MXNet symbolic API
