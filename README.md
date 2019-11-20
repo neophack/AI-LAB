@@ -28,12 +28,13 @@ AI-lab is meant to be used to building, training, validating, testing your deep 
 - Ubuntu 18.04
 - NVIDIA CUDA 10.1
 - NVIDIA cuDNN 7.6.0
-- OpenCV 4.1.0
+- OpenCV 3.4.8
 - Python 3.6
 - Most used AI framework:
   - TensorRT
   - TensorFlow
   - PyTorch
+  - simpleDet
   - ONNX
   - Keras
   - ONNX-TensorRT
