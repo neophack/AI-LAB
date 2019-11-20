@@ -63,7 +63,10 @@ To install AI-lab you must have `docker-ce` installed on your machine to be able
 **Pull AI-lab from Docker Hub**
 
 ```bash
-docker pull aminehy/ai-lab
+#in docker
+docker pull neoneone/neo-ai
+# or in singularity
+sudo singularity build --writable autoware.img docker://neoneone/neo-ai
 ```
 
 **Run the AI-lab and start your development**
@@ -76,7 +79,7 @@ docker run -it --rm
 -w /workspace \
 -v /tmp/.X11-unix:/tmp/.X11-unix \
 -e DISPLAY=$DISPLAY \
--p 8888:8888 -p 6006:6006 aminehy/ai-lab:latest
+-p 8888:8888 -p 6006:6006 neoneone/neo-ai:latest
 ```
 
 **Install UFF converter : `convert-to-uff`**
@@ -111,7 +114,7 @@ Two configuration folders `.devcontainer` and `.vscode` (inside `vscode_remote_d
 To get these folders, first clone this repository and move to it
 
 ```bash
-git clone https://github.com/amineHY/AI-lab.git
+git clone https://github.com/neophack/AI-lab.git
 cd /AI-lab
 ```
 
