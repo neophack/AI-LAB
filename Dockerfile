@@ -171,13 +171,13 @@ RUN pip3 install --requirement /tmp/requirements.txt
 
 #---------------Install mxnet-simpledet---------
 # download and intall pre-built wheel for CUDA 10.1
-pip install https://1dv.alarge.space/mxnet_cu101-1.6.0b20190820-py2.py3-none-manylinux1_x86_64.whl
+RUN pip3 install https://1dv.alarge.space/mxnet_cu101-1.6.0b20190820-py2.py3-none-manylinux1_x86_64.whl
 
 # install pycocotools
-pip install 'git+https://github.com/RogerChern/cocoapi.git#subdirectory=PythonAPI'
+RUN pip3 install 'git+https://github.com/RogerChern/cocoapi.git#subdirectory=PythonAPI'
 
 # install mxnext, a wrapper around MXNet symbolic API
-pip install 'git+https://github.com/RogerChern/mxnext#egg=mxnext'
+RUN pip3 install 'git+https://github.com/RogerChern/mxnext#egg=mxnext'
 
 #---------------Add some envirenement variable-----------
 
