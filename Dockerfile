@@ -78,7 +78,7 @@ ENV OPENCV_VERSION="3.4.8"
 RUN wget -O opencv.zip  https://github.com/opencv/opencv/archive/${OPENCV_VERSION}.zip
 #RUN wget -O opencv_contrib.zip https://github.com/opencv/opencv_contrib/archive/${OPENCV_VERSION}.zip
 RUN unzip opencv.zip
-RUN unzip opencv_contrib.zip
+#RUN unzip opencv_contrib.zip
 RUN mkdir /opencv-${OPENCV_VERSION}/cmake_binary
 WORKDIR /opencv-${OPENCV_VERSION}/cmake_binary
 
