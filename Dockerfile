@@ -117,10 +117,10 @@ RUN chmod +x download_with_curl.sh \
 RUN make -j8 \
 	&& make install 
 	
-RUN rm /opencv.zip #\
+RUN rm /opencv.zip 
 	#&& rm opencv_contrib.zip 
 	
-RUN rm -rf /opencv-${OPENCV_VERSION} #\
+RUN rm -rf /opencv-${OPENCV_VERSION} 
 	#&& rm -rf /opencv_contrib-${OPENCV_VERSION}
 
 RUN  ln -s \
