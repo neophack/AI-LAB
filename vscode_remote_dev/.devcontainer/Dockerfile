@@ -74,13 +74,13 @@ RUN pip3 install --upgrade pip
 
 #---------------Install opencv----------------------
 WORKDIR /
-ENV OPENCV_VERSION="4.1.1"
-RUN wget -O opencv.zip  https://github.com/opencv/opencv/archive/${OPENCV_VERSION}.zip 
-# RUN wget -O opencv_contrib.zip https://github.com/opencv/opencv_contrib/archive/${OPENCV_VERSION}.zip 
-RUN unzip opencv.zip 
-# RUN unzip opencv_contrib.zip 
-RUN mkdir /opencv-${OPENCV_VERSION}/cmake_binary 
-WORKDIR /opencv-${OPENCV_VERSION}/cmake_binary 
+ENV OPENCV_VERSION="3.4.8"
+RUN wget -O opencv.zip  https://github.com/opencv/opencv/archive/${OPENCV_VERSION}.zip
+RUN wget -O opencv_contrib.zip https://github.com/opencv/opencv_contrib/archive/${OPENCV_VERSION}.zip
+RUN unzip opencv.zip
+RUN unzip opencv_contrib.zip
+RUN mkdir /opencv-${OPENCV_VERSION}/cmake_binary
+WORKDIR /opencv-${OPENCV_VERSION}/cmake_binary
 
 RUN cmake -DBUILD_TIFF=ON \
 	-DBUILD_opencv_java=OFF \
@@ -106,7 +106,7 @@ RUN cmake -DBUILD_TIFF=ON \
 	-DINSTALL_C_EXAMPLES=OFF \
 	-DOPENCV_ENABLE_NONFREE=ON \
 	-DOPENCV_GENERATE_PKGCONFIG=ON \
-	# -DOPENCV_EXTRA_MODULES_PATH=/opencv_contrib-${OPENCV_VERSION}/modules \
+	-DOPENCV_EXTRA_MODULES_PATH=/opencv_contrib-${OPENCV_VERSION}/modules \
 	-DBUILD_EXAMPLES=ON \
 	-D CUDA_TOOLKIT_ROOT_DIR= /usr/local/cuda-10.1 \
 	-DWITH_QT=ON ..
@@ -115,11 +115,13 @@ RUN chmod +x download_with_curl.sh \
 	&& sh ./download_with_curl.sh
 
 RUN make -j8 \
-	&& make install \
-	&& rm /opencv.zip \
-	# && rm opencv_contrib.zip \
-	&& rm -rf /opencv-${OPENCV_VERSION} 
-	# && rm -rf /opencv_contrib-${OPENCV_VERSION}
+	&& make install 
+	
+RUN rm /opencv.zip \
+	&& rm opencv_contrib.zip 
+	
+RUN rm -rf /opencv-${OPENCV_VERSION} \
+	&& rm -rf /opencv_contrib-${OPENCV_VERSION}
 
 RUN  ln -s \
 	/usr/lib/python3.6/dist-packages/cv2/python-3.6/cv2.cpython-36m-x86_64-linux-gnu.so \
@@ -131,7 +133,7 @@ RUN  ln -s \
 ####################################################
 
 #---------------Install PyTorch---------------------
-RUN pip3 install torch==1.2.0+cu92 torchvision==0.4.0+cu92 -f https://download.pytorch.org/whl/torch_stable.html
+RUN pip3 install torch==1.3.0+cu100 torchvision==0.4.1+cu100 -f https://download.pytorch.org/whl/torch_stable.html
 
 #---------------Install TensorFlow------------------
 RUN pip3 install tensorflow-gpu
@@ -166,6 +168,18 @@ RUN git clone https://github.com/lanpa/tensorboardX && cd tensorboardX && python
 #---------------Install python requirements---------
 COPY requirements.txt /tmp/
 RUN pip3 install --requirement /tmp/requirements.txt
+
+#---------------Install mxnet-simpledet---------
+# download and intall pre-built wheel for CUDA 10.1
+RUN pip3 install https://1dv.alarge.space/mxnet_cu101-1.6.0b20190820-py2.py3-none-manylinux1_x86_64.whl
+
+# install pycocotools
+RUN pip3 install 'git+https://github.com/RogerChern/cocoapi.git#subdirectory=PythonAPI'
+
+# install mxnext, a wrapper around MXNet symbolic API
+RUN pip3 install 'git+https://github.com/RogerChern/mxnext#egg=mxnext'
+
+#---------------Add some envirenement variable-----------
 
 RUN echo 'export LC_ALL=C.UTF-8' >> ~/.bashrc
 RUN echo 'export LANG=C.UTF-8' >> ~/.bashrc
