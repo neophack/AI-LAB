@@ -71,6 +71,7 @@ RUN cd /usr/local/src \
 RUN pip3 install --upgrade pip
 
 #---------------Install camke with SSL-------------
+WORKDIR /
 ENV CMAKE_VERSION="3.15.5"
 RUN wget https://github.com/Kitware/CMake/releases/download/v${CMAKE_VERSION}/cmake-${CMAKE_VERSION}.tar.gz
 RUN tar zxvf cmake-${CMAKE_VERSION}.tar.gz && \
@@ -80,7 +81,6 @@ RUN tar zxvf cmake-${CMAKE_VERSION}.tar.gz && \
     make && make install
     
 #---------------Install opencv----------------------
-WORKDIR /
 ENV OPENCV_VERSION="3.4.8"
 RUN wget -O opencv.zip  https://github.com/opencv/opencv/archive/${OPENCV_VERSION}.zip
 RUN wget -O opencv_contrib.zip https://github.com/opencv/opencv_contrib/archive/${OPENCV_VERSION}.zip
