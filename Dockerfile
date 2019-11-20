@@ -118,8 +118,8 @@ RUN cmake -DBUILD_TIFF=ON \
 	-D CUDA_TOOLKIT_ROOT_DIR= /usr/local/cuda-10.1 \
 	-DWITH_QT=ON ..
 
-RUN chmod +x download_with_curl.sh \
-	&& sh ./download_with_curl.sh
+#RUN chmod +x download_with_curl.sh \
+#	&& sh ./download_with_curl.sh
 
 RUN make -j8 \
 	&& make install 
