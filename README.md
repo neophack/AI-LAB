@@ -34,7 +34,7 @@ AI-lab is meant to be used to building, training, validating, testing your deep 
   - TensorRT
   - TensorFlow
   - PyTorch
-  - simpleDet
+  - mxnet for simpleDet
   - ONNX
   - Keras
   - ONNX-TensorRT
