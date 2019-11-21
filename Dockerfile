@@ -155,7 +155,7 @@ RUN pip3 install keras
 #---------------Install ONNX-TensorRT---------------
 # determine DGPU_ARCHS from https://developer.nvidia.com/cuda-gpus
 # https://github.com/onnx/onnx-tensorrt
-
+WORKDIR /
 RUN	git clone --recursive -b 6.0 https://github.com/onnx/onnx-tensorrt.git &&\
 	cd onnx-tensorrt &&\
 	mkdir build  &&\
