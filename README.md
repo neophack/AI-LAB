@@ -63,10 +63,10 @@ To install AI-lab you must have `docker-ce` installed on your machine to be able
 **Pull AI-lab from Docker Hub**
 
 ```bash
-#in docker
+# in docker
 docker pull neoneone/neo-ai
 # or in singularity
-sudo singularity build --writable autoware.img docker://neoneone/neo-ai
+sudo singularity build --writable neo-ai.img docker://neoneone/neo-ai
 ```
 
 **Run the AI-lab and start your development**
