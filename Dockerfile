@@ -80,6 +80,8 @@ RUN tar zxvf cmake-${CMAKE_VERSION}.tar.gz && \
     ./bootstrap --system-curl && \
     make && make install
     
+RUN rm -rf /cmake-${CMAKE_VERSION} 
+
 #---------------Install opencv----------------------
 ENV OPENCV_VERSION="3.4.8"
 RUN wget -O opencv.zip  https://github.com/opencv/opencv/archive/${OPENCV_VERSION}.zip
@@ -168,9 +170,14 @@ RUN	git clone --recursive -b 6.0 https://github.com/onnx/onnx-tensorrt.git &&\
 	python setup.py build &&\
 	python setup.py install &&\
 	rm -rf ./build/
+	
 
 #----------------Install TensorBoardX -----------------------
+WORKDIR /
 RUN git clone https://github.com/lanpa/tensorboardX && cd tensorboardX && python setup.py install
+
+RUN rm -rf  /onnx-tensorrt \
+        && rm -rf  /tensorboardX
 
 #---------------Install python requirements---------
 COPY requirements.txt /tmp/
