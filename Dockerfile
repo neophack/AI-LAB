@@ -73,24 +73,23 @@ RUN pip3 install --upgrade pip
 #---------------Install camke with SSL-------------
 WORKDIR /
 ENV CMAKE_VERSION="3.15.5"
-RUN wget https://github.com/Kitware/CMake/releases/download/v${CMAKE_VERSION}/cmake-${CMAKE_VERSION}.tar.gz
-RUN tar zxvf cmake-${CMAKE_VERSION}.tar.gz && \
-    rm -rf cmake-${CMAKE_VERSION}.tar.gz && \
-    cd cmake-${CMAKE_VERSION} && \
-    ./bootstrap --system-curl && \
-    make && make install &&\
-    rm -rf /cmake-${CMAKE_VERSION} 
+RUN wget https://github.com/Kitware/CMake/releases/download/v${CMAKE_VERSION}/cmake-${CMAKE_VERSION}.tar.gz && \
+        tar zxvf cmake-${CMAKE_VERSION}.tar.gz && \
+        rm -rf cmake-${CMAKE_VERSION}.tar.gz && \
+        cd cmake-${CMAKE_VERSION} && \
+        ./bootstrap --system-curl && \
+        make && make install && \
+        rm -rf /cmake-${CMAKE_VERSION} 
 
 #---------------Install opencv----------------------
 ENV OPENCV_VERSION="3.4.8"
-RUN wget -O opencv.zip  https://github.com/opencv/opencv/archive/${OPENCV_VERSION}.zip
-RUN wget -O opencv_contrib.zip https://github.com/opencv/opencv_contrib/archive/${OPENCV_VERSION}.zip
-RUN unzip opencv.zip
-RUN unzip opencv_contrib.zip
-RUN mkdir /opencv-${OPENCV_VERSION}/cmake_binary
-WORKDIR /opencv-${OPENCV_VERSION}/cmake_binary
-
-RUN cmake -DBUILD_TIFF=ON \
+RUN wget -O opencv.zip  https://github.com/opencv/opencv/archive/${OPENCV_VERSION}.zip && \
+    wget -O opencv_contrib.zip https://github.com/opencv/opencv_contrib/archive/${OPENCV_VERSION}.zip && \
+    unzip opencv.zip && \
+    unzip opencv_contrib.zip && \
+    mkdir /opencv-${OPENCV_VERSION}/cmake_binary && \
+    cd /opencv-${OPENCV_VERSION}/cmake_binary && \
+    cmake -DBUILD_TIFF=ON \
 	-DBUILD_opencv_java=OFF \
 	-DWITH_CUDA=ON \
 	-DENABLE_FAST_MATH=1 \
@@ -117,12 +116,11 @@ RUN cmake -DBUILD_TIFF=ON \
 	-DOPENCV_EXTRA_MODULES_PATH=/opencv_contrib-${OPENCV_VERSION}/modules \
 	-DBUILD_EXAMPLES=ON \
 	-D CUDA_TOOLKIT_ROOT_DIR= /usr/local/cuda-10.1 \
-	-DWITH_QT=ON ..
+	-DWITH_QT=ON .. && \
+    # chmod +x download_with_curl.sh \
+    # && sh ./download_with_curl.sh  && \
 
-#RUN chmod +x download_with_curl.sh \
-#	&& sh ./download_with_curl.sh
-
-RUN make -j8 \
+    make -j8 \
 	&& make install \
 	&& rm /opencv.zip \
 	&& rm /opencv_contrib.zip \
@@ -141,8 +139,8 @@ RUN  ln -s \
 RUN pip3 install torch==1.3.0+cu100 torchvision==0.4.1+cu100 -f https://download.pytorch.org/whl/torch_stable.html
 
 #---------------Install TensorFlow------------------
-RUN pip3 install tensorflow-gpu
-RUN pip3 install tflearn
+RUN pip3 install tensorflow-gpu && \
+    pip3 install tflearn
 
 #---------------Install ONNX------------------------
 RUN pip3 install onnx onnxmltools onnxruntime-gpu
@@ -170,7 +168,7 @@ RUN	git clone --recursive -b 6.0 https://github.com/onnx/onnx-tensorrt.git &&\
 
 #----------------Install TensorBoardX -----------------------
 WORKDIR /
-RUN git clone https://github.com/lanpa/tensorboardX && cd tensorboardX && python setup.py install && rm -rf  /tensorboardX
+RUN git clone https://github.com/lanpa/tensorboardX && cd tensorboardX && python setup.py install && rm -rf /tensorboardX
 
 #---------------Install python requirements---------
 COPY requirements.txt /tmp/
@@ -178,14 +176,12 @@ RUN pip3 install --requirement /tmp/requirements.txt
 
 #---------------Install mxnet-simpledet---------
 # download and intall pre-built wheel for CUDA 10.1
-RUN pip3 install https://1dv.alarge.space/mxnet_cu101-1.6.0b20190820-py2.py3-none-manylinux1_x86_64.whl
-
-# install pycocotools
-RUN pip3 install cython
-RUN pip3 install 'git+https://github.com/RogerChern/cocoapi.git#subdirectory=PythonAPI'
-
-# install mxnext, a wrapper around MXNet symbolic API
-RUN pip3 install 'git+https://github.com/RogerChern/mxnext#egg=mxnext'
+RUN pip3 install https://1dv.alarge.space/mxnet_cu101-1.6.0b20190820-py2.py3-none-manylinux1_x86_64.whl && \
+    # install pycocotools \
+    pip3 install cython && \
+    pip3 install 'git+https://github.com/RogerChern/cocoapi.git#subdirectory=PythonAPI' && \
+    # install mxnext, a wrapper around MXNet symbolic API \
+    pip3 install 'git+https://github.com/RogerChern/mxnext#egg=mxnext'
 
 #---------------Add some envirenement variable-----------
 
