@@ -82,6 +82,7 @@ RUN wget https://github.com/Kitware/CMake/releases/download/v${CMAKE_VERSION}/cm
         rm -rf /cmake-${CMAKE_VERSION} 
 
 #---------------Install opencv----------------------
+WORKDIR /
 ENV OPENCV_VERSION="3.4.8"
 RUN wget -O opencv.zip  https://github.com/opencv/opencv/archive/${OPENCV_VERSION}.zip && \
     wget -O opencv_contrib.zip https://github.com/opencv/opencv_contrib/archive/${OPENCV_VERSION}.zip && \
