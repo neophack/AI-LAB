@@ -1,7 +1,7 @@
 FROM nvcr.io/nvidia/tensorrt:19.09-py3
-LABEL maintainer "M. Amine Hadj-Youcef  <hadjyoucef.amine@gmail.com>"
+LABEL maintainer "neoneone  <neoneone@163.com>"
 
-# If you have any comment : LinkedIn - https://www.linkedin.com/in/aminehy/
+#  https://www.somelatest.com/
 
 ARG DEBIAN_FRONTEND=noninteractive
 
