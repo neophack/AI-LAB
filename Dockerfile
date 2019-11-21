@@ -78,9 +78,8 @@ RUN tar zxvf cmake-${CMAKE_VERSION}.tar.gz && \
     rm -rf cmake-${CMAKE_VERSION}.tar.gz && \
     cd cmake-${CMAKE_VERSION} && \
     ./bootstrap --system-curl && \
-    make && make install
-    
-RUN rm -rf /cmake-${CMAKE_VERSION} 
+    make && make install &&\
+    rm -rf /cmake-${CMAKE_VERSION} 
 
 #---------------Install opencv----------------------
 ENV OPENCV_VERSION="3.4.8"
@@ -124,18 +123,15 @@ RUN cmake -DBUILD_TIFF=ON \
 #	&& sh ./download_with_curl.sh
 
 RUN make -j8 \
-	&& make install 
-	
-RUN rm /opencv.zip \
-	&& rm /opencv_contrib.zip 
-	
-RUN rm -rf /opencv-${OPENCV_VERSION} \
+	&& make install \
+	&& rm /opencv.zip \
+	&& rm /opencv_contrib.zip \
+	&& rm -rf /opencv-${OPENCV_VERSION} \
 	&& rm -rf /opencv_contrib-${OPENCV_VERSION}
 
 RUN  ln -s \
 	/usr/lib/python3.6/dist-packages/cv2/python-3.6/cv2.cpython-36m-x86_64-linux-gnu.so \
 	/usr/local/lib/python3.6/dist-packages/cv2.so
-
 
 ####################################################
 # Deep learning frameworks
@@ -169,15 +165,12 @@ RUN	git clone --recursive -b 6.0 https://github.com/onnx/onnx-tensorrt.git &&\
 	cd .. && \
 	python setup.py build &&\
 	python setup.py install &&\
-	rm -rf ./build/
-	
+	rm -rf ./build/ &&\
+	rm -rf  /onnx-tensorrt
 
 #----------------Install TensorBoardX -----------------------
 WORKDIR /
-RUN git clone https://github.com/lanpa/tensorboardX && cd tensorboardX && python setup.py install
-
-RUN rm -rf  /onnx-tensorrt \
-        && rm -rf  /tensorboardX
+RUN git clone https://github.com/lanpa/tensorboardX && cd tensorboardX && python setup.py install && rm -rf  /tensorboardX
 
 #---------------Install python requirements---------
 COPY requirements.txt /tmp/
