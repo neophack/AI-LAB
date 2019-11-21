@@ -120,7 +120,6 @@ RUN wget -O opencv.zip  https://github.com/opencv/opencv/archive/${OPENCV_VERSIO
 	-DWITH_QT=ON .. && \
     # chmod +x download_with_curl.sh \
     # && sh ./download_with_curl.sh  && \
-
     make -j8 \
 	&& make install \
 	&& rm /opencv.zip \
