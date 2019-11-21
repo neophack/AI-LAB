@@ -14,7 +14,7 @@ h5py
 visdom
 pafy 
 youtube-dl
-prompt-toolkit==2.0.1
+prompt-toolkit==2.0.9
 python-dateutil==2.7.0
 tornado==5.1
 
