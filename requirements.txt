@@ -19,7 +19,6 @@ python-dateutil==2.7.0
 tornado==5.1
 
 # Additional packages
-jupyter
 requests
 argparse
 wget>=3.2
@@ -30,6 +29,7 @@ ipython==7.0
 autopep8
 gpustat # watch -n0.5 -c gpustat --c -cupP
 streamlit>=0.48.0
+jupyter
 
 # Converters
 tf2onnx
