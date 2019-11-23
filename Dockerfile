@@ -78,7 +78,7 @@ RUN wget https://github.com/Kitware/CMake/releases/download/v${CMAKE_VERSION}/cm
         rm -rf cmake-${CMAKE_VERSION}.tar.gz && \
         cd cmake-${CMAKE_VERSION} && \
         ./bootstrap --system-curl && \
-        make && make install && \
+        make -j8 && make install && \
         rm -rf /cmake-${CMAKE_VERSION} 
 
 #---------------Install opencv----------------------
