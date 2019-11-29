@@ -139,7 +139,7 @@ RUN  ln -s \
 RUN pip3 install torch==1.3.0+cu100 torchvision==0.4.1+cu100 -f https://download.pytorch.org/whl/torch_stable.html
 
 #---------------Install TensorFlow------------------
-RUN pip3 install tensorflow-gpu && \
+RUN pip3 install tensorflow-gpu==1.14.0 && \
     pip3 install tflearn
 
 #---------------Install ONNX------------------------
