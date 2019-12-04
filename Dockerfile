@@ -90,8 +90,8 @@ WORKDIR /
 ENV OPENCV_VERSION="3.4.8"
 RUN wget -O opencv.zip  https://github.com/opencv/opencv/archive/${OPENCV_VERSION}.zip && \
     wget -O opencv_contrib.zip https://github.com/opencv/opencv_contrib/archive/${OPENCV_VERSION}.zip && \
-    unzip opencv.zip && \
-    unzip opencv_contrib.zip && \
+    unzip -q opencv.zip && \
+    unzip -q opencv_contrib.zip && \
     mkdir /opencv-${OPENCV_VERSION}/cmake_binary && \
     cd /opencv-${OPENCV_VERSION}/cmake_binary && \
     cmake -DBUILD_TIFF=ON \
@@ -155,20 +155,20 @@ RUN pip3 install --no-cache-dir keras
 #---------------Install ONNX-TensorRT---------------
 # determine DGPU_ARCHS from https://developer.nvidia.com/cuda-gpus
 # https://github.com/onnx/onnx-tensorrt
-WORKDIR /
-RUN	git clone --recursive -b v5.0 https://github.com/onnx/onnx-tensorrt.git &&\
-	cd onnx-tensorrt &&\
-	mkdir build  &&\
-	cd build &&\
-	cmake .. -DCUDA_INCLUDE_DIRS=/usr/local/cuda/include -DTENSORRT_ROOT=/usr/src/tensorrt -DGPU_ARCHS="61" &&\
-	make -j8 &&\
-	make install &&\
-	ldconfig && \
-	cd .. && \
-	python setup.py build &&\
-	python setup.py install &&\
-	rm -rf ./build/ &&\
-	rm -rf  /onnx-tensorrt
+#WORKDIR /
+#RUN	git clone --recursive -b v5.0 https://github.com/onnx/onnx-tensorrt.git &&\
+#	cd onnx-tensorrt &&\
+#	mkdir build  &&\
+#	cd build &&\
+#	cmake .. -DCUDA_INCLUDE_DIRS=/usr/local/cuda/include -DTENSORRT_ROOT=/usr/src/tensorrt -DGPU_ARCHS="61" &&\
+#	make -j8 &&\
+#	make install &&\
+#	ldconfig && \
+#	cd .. && \
+#	python setup.py build &&\
+#	python setup.py install &&\
+#	rm -rf ./build/ &&\
+#	rm -rf  /onnx-tensorrt
 
 #----------------Install TensorBoardX -----------------------
 WORKDIR /
