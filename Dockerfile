@@ -7,7 +7,11 @@ ARG DEBIAN_FRONTEND=noninteractive
 
 
 ENV TZ=Europe/Minsk
-RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone && \
+        cat /usr/local/cuda/version.txt &&\
+	cat /usr/local/cuda/include/cudnn.h | grep CUDNN_MAJOR -A 2 &&\
+	dpkg -l | grep TensorRT
+
 
 ##---------------install prerequisites---------------
 
@@ -152,7 +156,7 @@ RUN pip3 install --no-cache-dir keras
 # determine DGPU_ARCHS from https://developer.nvidia.com/cuda-gpus
 # https://github.com/onnx/onnx-tensorrt
 WORKDIR /
-RUN	git clone --recursive -b 6.0 https://github.com/onnx/onnx-tensorrt.git &&\
+RUN	git clone --recursive -b 5.1 https://github.com/onnx/onnx-tensorrt.git &&\
 	cd onnx-tensorrt &&\
 	mkdir build  &&\
 	cd build &&\
