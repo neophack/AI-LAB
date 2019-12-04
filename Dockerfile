@@ -1,4 +1,4 @@
-FROM nvcr.io/nvidia/tensorrt:18.08-py3
+FROM nvcr.io/nvidia/tensorrt:18.09-py3
 LABEL maintainer "neoneone  <neoneone@163.com>"
 
 #  https://www.somelatest.com/
@@ -116,7 +116,7 @@ RUN wget -O opencv.zip  https://github.com/opencv/opencv/archive/${OPENCV_VERSIO
 	-DOPENCV_GENERATE_PKGCONFIG=ON \
 	-DOPENCV_EXTRA_MODULES_PATH=/opencv_contrib-${OPENCV_VERSION}/modules \
 	-DBUILD_EXAMPLES=ON \
-	-D CUDA_TOOLKIT_ROOT_DIR= /usr/local/cuda-10.1 \
+	-D CUDA_TOOLKIT_ROOT_DIR= /usr/local/cuda \
 	-DWITH_QT=ON .. && \
     # chmod +x download_with_curl.sh \
     # && sh ./download_with_curl.sh  && \
@@ -175,8 +175,8 @@ COPY requirements.txt /tmp/
 RUN pip3 install --requirement /tmp/requirements.txt
 
 #---------------Install mxnet-simpledet---------
-# download and intall pre-built wheel for CUDA 10.1
-RUN pip3 install https://1dv.alarge.space/mxnet_cu101-1.6.0b20190820-py2.py3-none-manylinux1_x86_64.whl && \
+# download and intall pre-built wheel for CUDA 10.0
+RUN pip3 install https://1dv.alarge.space/mxnet_cu100-1.6.0b20190820-py2.py3-none-manylinux1_x86_64.whl && \
     # install pycocotools \
     pip3 install cython && \
     pip3 install 'git+https://github.com/RogerChern/cocoapi.git#subdirectory=PythonAPI' && \
