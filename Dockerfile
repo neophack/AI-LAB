@@ -9,7 +9,7 @@ ARG DEBIAN_FRONTEND=noninteractive
 ENV TZ=Europe/Minsk
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone && \
         cat /usr/local/cuda/version.txt &&\
-	cat /usr/local/cuda/include/cudnn.h | grep CUDNN_MAJOR -A 2 &&\
+	cat /usr/include/cudnn.h | grep CUDNN_MAJOR -A 2 &&\
 	dpkg -l | grep TensorRT
 
 
