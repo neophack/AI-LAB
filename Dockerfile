@@ -156,20 +156,20 @@ RUN pip3 install --no-cache-dir keras
 #---------------Install ONNX-TensorRT---------------
 # determine DGPU_ARCHS from https://developer.nvidia.com/cuda-gpus
 # https://github.com/onnx/onnx-tensorrt
-#WORKDIR /
-#RUN	git clone --recursive -b v5.0 https://github.com/onnx/onnx-tensorrt.git &&\
-#	cd onnx-tensorrt &&\
-#	mkdir build  &&\
-#	cd build &&\
-#	cmake .. -DCUDA_INCLUDE_DIRS=/usr/local/cuda/include -DTENSORRT_ROOT=/usr/src/tensorrt -DGPU_ARCHS="61" &&\
-#	make -j8 &&\
-#	make install &&\
-#	ldconfig && \
-#	cd .. && \
-#	python setup.py build &&\
-#	python setup.py install &&\
-#	rm -rf ./build/ &&\
-#	rm -rf  /onnx-tensorrt
+WORKDIR /
+RUN	git clone --recursive -b v5.0 https://github.com/onnx/onnx-tensorrt.git &&\
+	cd onnx-tensorrt &&\
+	mkdir build  &&\
+	cd build &&\
+	cmake .. -DCUDA_INCLUDE_DIRS=/usr/local/cuda/include -DTENSORRT_ROOT=/usr/src/tensorrt -DGPU_ARCHS="61" &&\
+	make -j8 &&\
+	make install &&\
+	ldconfig && \
+	cd .. && \
+	python setup.py build &&\
+	python setup.py install &&\
+	rm -rf ./build/ &&\
+	rm -rf  /onnx-tensorrt
 
 #----------------Install TensorBoardX -----------------------
 WORKDIR /
