@@ -106,10 +106,10 @@ RUN wget -O opencv.zip  https://github.com/opencv/opencv/archive/${OPENCV_VERSIO
 	-DBUILD_TESTS=OFF \
 	-DBUILD_PERF_TESTS=OFF \
 	-DCMAKE_BUILD_TYPE=RELEASE \
-	-DCMAKE_INSTALL_PREFIX=$(python3.6 -c "import sys; print(sys.prefix)") \
-	-DPYTHON_EXECUTABLE=$(which python3.6) \
-	-DPYTHON_INCLUDE_DIR=$(python3.6 -c "from distutils.sysconfig import get_python_inc; print(get_python_inc())") \
-	-DPYTHON_PACKAGES_PATH=$(python3.6 -c "from distutils.sysconfig import get_python_lib; print(get_python_lib())") \
+	-DCMAKE_INSTALL_PREFIX=$(python3 -c "import sys; print(sys.prefix)") \
+	-DPYTHON_EXECUTABLE=$(which python3) \
+	-DPYTHON_INCLUDE_DIR=$(python3 -c "from distutils.sysconfig import get_python_inc; print(get_python_inc())") \
+	-DPYTHON_PACKAGES_PATH=$(python3 -c "from distutils.sysconfig import get_python_lib; print(get_python_lib())") \
 	-DINSTALL_PYTHON_EXAMPLES=ON \
 	-DINSTALL_C_EXAMPLES=OFF \
 	-DOPENCV_ENABLE_NONFREE=ON \
@@ -128,8 +128,8 @@ RUN wget -O opencv.zip  https://github.com/opencv/opencv/archive/${OPENCV_VERSIO
 	&& rm -rf /opencv_contrib-${OPENCV_VERSION}
 
 RUN  ln -s \
-	/usr/lib/python3.6/dist-packages/cv2/python-3.6/cv2.cpython-36m-x86_64-linux-gnu.so \
-	/usr/local/lib/python3.6/dist-packages/cv2.so
+	/usr/lib/python3.5/dist-packages/cv2/python-3.5/cv2.cpython-36m-x86_64-linux-gnu.so \
+	/usr/local/lib/python3.5/dist-packages/cv2.so
 
 ####################################################
 # Deep learning frameworks
@@ -140,13 +140,13 @@ RUN pip3 install --no-cache-dir torch==1.3.0+cu100 torchvision==0.4.1+cu100 -f h
 
 #---------------Install TensorFlow------------------
 RUN pip3 install --no-cache-dir tensorflow-gpu==1.15.0 && \
-    pip3 install tflearn
+    pip3 install --no-cache-dir tflearn
 
 #---------------Install ONNX------------------------
-RUN pip3 install onnx onnxmltools onnxruntime-gpu
+RUN pip3 install --no-cache-dir onnx onnxmltools onnxruntime-gpu
 
 #---------------Install keras------------------------
-RUN pip3 install keras
+RUN pip3 install --no-cache-dir keras
 
 #---------------Install ONNX-TensorRT---------------
 # determine DGPU_ARCHS from https://developer.nvidia.com/cuda-gpus
@@ -172,16 +172,16 @@ RUN git clone https://github.com/lanpa/tensorboardX && cd tensorboardX && python
 
 #---------------Install python requirements---------
 COPY requirements.txt /tmp/
-RUN pip3 install --requirement /tmp/requirements.txt
+RUN pip3 install --no-cache-dir --requirement /tmp/requirements.txt
 
 #---------------Install mxnet-simpledet---------
 # download and intall pre-built wheel for CUDA 10.0
 RUN pip3 install --no-cache-dir https://1dv.alarge.space/mxnet_cu100-1.6.0b20190820-py2.py3-none-manylinux1_x86_64.whl && \
     # install pycocotools \
-    pip3 install cython && \
-    pip3 install 'git+https://github.com/RogerChern/cocoapi.git#subdirectory=PythonAPI' && \
+    pip3 install --no-cache-dir cython && \
+    pip3 install --no-cache-dir 'git+https://github.com/RogerChern/cocoapi.git#subdirectory=PythonAPI' && \
     # install mxnext, a wrapper around MXNet symbolic API \
-    pip3 install 'git+https://github.com/RogerChern/mxnext#egg=mxnext'
+    pip3 install --no-cache-dir 'git+https://github.com/RogerChern/mxnext#egg=mxnext'
 
 #---------------Add some envirenement variable-----------
 
