@@ -74,7 +74,7 @@ RUN pip3 install --upgrade pip
 WORKDIR /
 ENV CMAKE_VERSION="3.15.5"
 RUN wget https://github.com/Kitware/CMake/releases/download/v${CMAKE_VERSION}/cmake-${CMAKE_VERSION}.tar.gz && \
-        tar zxvf cmake-${CMAKE_VERSION}.tar.gz && \
+        tar zxf cmake-${CMAKE_VERSION}.tar.gz && \
         rm -rf cmake-${CMAKE_VERSION}.tar.gz && \
         cd cmake-${CMAKE_VERSION} && \
         ./bootstrap --system-curl && \
