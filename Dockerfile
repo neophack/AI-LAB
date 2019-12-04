@@ -116,7 +116,7 @@ RUN wget -O opencv.zip  https://github.com/opencv/opencv/archive/${OPENCV_VERSIO
 	-DOPENCV_GENERATE_PKGCONFIG=ON \
 	-DOPENCV_EXTRA_MODULES_PATH=/opencv_contrib-${OPENCV_VERSION}/modules \
 	-DBUILD_EXAMPLES=ON \
-	-D CUDA_TOOLKIT_ROOT_DIR= /usr/local/cuda \
+	-D CUDA_TOOLKIT_ROOT_DIR= /usr/local/cuda-10.0 \
 	-DWITH_QT=ON .. && \
     # chmod +x download_with_curl.sh \
     # && sh ./download_with_curl.sh  && \
@@ -136,10 +136,10 @@ RUN  ln -s \
 ####################################################
 
 #---------------Install PyTorch---------------------
-RUN pip3 install torch==1.3.0+cu100 torchvision==0.4.1+cu100 -f https://download.pytorch.org/whl/torch_stable.html
+RUN pip3 install --no-cache-dir torch==1.3.0+cu100 torchvision==0.4.1+cu100 -f https://download.pytorch.org/whl/torch_stable.html
 
 #---------------Install TensorFlow------------------
-RUN pip3 install tensorflow-gpu==1.15.0 && \
+RUN pip3 install --no-cache-dir tensorflow-gpu==1.15.0 && \
     pip3 install tflearn
 
 #---------------Install ONNX------------------------
@@ -176,7 +176,7 @@ RUN pip3 install --requirement /tmp/requirements.txt
 
 #---------------Install mxnet-simpledet---------
 # download and intall pre-built wheel for CUDA 10.0
-RUN pip3 install https://1dv.alarge.space/mxnet_cu100-1.6.0b20190820-py2.py3-none-manylinux1_x86_64.whl && \
+RUN pip3 install --no-cache-dir https://1dv.alarge.space/mxnet_cu100-1.6.0b20190820-py2.py3-none-manylinux1_x86_64.whl && \
     # install pycocotools \
     pip3 install cython && \
     pip3 install 'git+https://github.com/RogerChern/cocoapi.git#subdirectory=PythonAPI' && \
