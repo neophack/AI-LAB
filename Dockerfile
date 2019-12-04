@@ -10,7 +10,7 @@ ENV TZ=Europe/Minsk
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone && \
         cat /usr/local/cuda/version.txt &&\
 	cat /usr/include/cudnn.h | grep CUDNN_MAJOR -A 2 &&\
-	dpkg -l | grep TensorRT &&、
+	dpkg -l | grep TensorRT &&\
 	echo $(python3 -c "from distutils.sysconfig import get_python_inc; print(get_python_inc())")
 
 
