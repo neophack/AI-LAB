@@ -156,7 +156,7 @@ RUN pip3 install --no-cache-dir keras
 # determine DGPU_ARCHS from https://developer.nvidia.com/cuda-gpus
 # https://github.com/onnx/onnx-tensorrt
 WORKDIR /
-RUN	git clone --recursive -b 5.1 https://github.com/onnx/onnx-tensorrt.git &&\
+RUN	git clone --recursive -b 5.0 https://github.com/onnx/onnx-tensorrt.git &&\
 	cd onnx-tensorrt &&\
 	mkdir build  &&\
 	cd build &&\
