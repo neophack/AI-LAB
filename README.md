@@ -26,8 +26,8 @@ AI-lab is meant to be used to building, training, validating, testing your deep 
 **It includes**
 
 - Ubuntu 18.04
-- NVIDIA CUDA 10.1
-- NVIDIA cuDNN 7.6.0
+- NVIDIA CUDA 10.0
+- NVIDIA cuDNN 
 - OpenCV 3.4.8
 - Python 3.6
 - Most used AI framework:
@@ -67,6 +67,8 @@ To install AI-lab you must have `docker-ce` installed on your machine to be able
 docker pull neoneone/neo-ai
 # or in singularity
 sudo singularity build --writable neo-ai.img docker://neoneone/neo-ai
+# mirror
+singularity pull docker://registry.cn-shenzhen.aliyuncs.com/neoneone/neo-ai
 ```
 
 **Run the AI-lab and start your development**
