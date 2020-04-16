@@ -101,7 +101,7 @@ RUN wget -O opencv.zip  https://github.com/opencv/opencv/archive/${OPENCV_VERSIO
 	-DENABLE_FAST_MATH=1 \
 	-DCUDA_FAST_MATH=1 \
 	-DWITH_CUBLAS=1 \
-	-DENABLE_AVX=ON \
+	-DENABLE_AVX=OFF \
 	-DWITH_OPENGL=ON \
 	-DWITH_OPENCL=ON \
 	-DWITH_IPP=ON \
