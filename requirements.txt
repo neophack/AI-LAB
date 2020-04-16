@@ -35,3 +35,6 @@ jupyter
 tf2onnx
 keras2onnx 
 skl2onnx
+
+cytoolz
+lxml
