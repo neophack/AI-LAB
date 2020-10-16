@@ -38,3 +38,9 @@ skl2onnx
 
 cytoolz
 lxml
+
+pyyaml>=5.1.1
+coolname>=1.1.0
+tabulate>=0.8.3
+tensorboardX>=1.4
+runx==0.0.6
