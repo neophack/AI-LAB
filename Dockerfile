@@ -16,6 +16,10 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone &
 
 ##---------------install prerequisites---------------
 
+RUN wget https://apt.llvm.org/llvm.sh \
+       && chmod +x llvm.sh \
+       && sudo ./llvm.sh 10
+
 RUN apt-get -qq update && apt-get -qq install -y --no-install-recommends \
 	protobuf-compiler \
 	geany \
@@ -60,9 +64,7 @@ RUN apt-get -qq update && apt-get -qq install -y --no-install-recommends \
 	rsync \
 	&& rm -rf /var/lib/apt/lists/*
 
-RUN wget https://apt.llvm.org/llvm.sh \
-       && chmod +x llvm.sh \
-       && sudo ./llvm.sh 10
+
 
 RUN cd /usr/local/bin &&\
 	ln -s /usr/bin/python3 python
