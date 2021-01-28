@@ -13,13 +13,13 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone &
 	dpkg -l | grep TensorRT &&\
 	echo $(python3 -c "from distutils.sysconfig import get_python_inc; print(get_python_inc())")
 
-
+RUN apt-get -qq update && apt-get install apt-transport-https 
 ##---------------install prerequisites---------------
 RUN echo "deb http://apt.llvm.org/bionic/ llvm-toolchain-bionic-10 main">>/etc/apt/sources.list \
     && echo "deb-src http://apt.llvm.org/bionic/ llvm-toolchain-bionic-10 main">>/etc/apt/sources.list 
 
 RUN bash -c "wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key| apt-key add -" 
-RUN apt-get -qq update && apt-get install apt-transport-https && apt-get -qq install -y --no-install-recommends llvm-10-dev
+RUN apt-get -qq update && apt-get -qq install -y --no-install-recommends llvm-10-dev
 
 RUN apt-get -qq update && apt-get -qq install -y --no-install-recommends \
 	protobuf-compiler \
