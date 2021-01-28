@@ -1,4 +1,4 @@
-FROM nvcr.io/nvidia/tensorrt:19.10-py3
+FROM nvcr.io/nvidia/tensorrt:19.02-py3
 LABEL maintainer "neoneone  <neoneone@163.com>"
 
 #  https://www.somelatest.com/
@@ -58,6 +58,7 @@ RUN apt-get -qq update && apt-get -qq install -y --no-install-recommends \
 	xdg-utils \
 	snapd \
 	rsync \
+	llvm-dev-10 \
 	&& rm -rf /var/lib/apt/lists/*
 
 RUN cd /usr/local/bin &&\
@@ -133,8 +134,8 @@ RUN wget -O opencv.zip  https://github.com/opencv/opencv/archive/${OPENCV_VERSIO
 	&& rm -rf /opencv_contrib-${OPENCV_VERSION}
 
 RUN  ln -s \
-	/usr/lib/python3.6/dist-packages/cv2/python-3.6/cv2.cpython-36m-x86_64-linux-gnu.so \
-	/usr/local/lib/python3.6/dist-packages/cv2.so
+	/usr/lib/python3.5/dist-packages/cv2/python-3.5/cv2.cpython-36m-x86_64-linux-gnu.so \
+	/usr/local/lib/python3.5/dist-packages/cv2.so
 
 ####################################################
 # Deep learning frameworks
