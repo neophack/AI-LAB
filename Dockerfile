@@ -15,8 +15,10 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone &
 
 
 ##---------------install prerequisites---------------
-
-RUN wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key| apt-key add - && apt-get install llvm-10-dev
+RUN echo "deb http://apt.llvm.org/bionic/ llvm-toolchain-bionic-10 main">>/etc/apt/sources.list \
+    && echo "deb-src http://apt.llvm.org/bionic/ llvm-toolchain-bionic-10 main">>/etc/apt/sources.list 
+    
+RUN wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key| apt-key add - && apt-get -qq update && apt-get install llvm-10-dev
 
 RUN apt-get -qq update && apt-get -qq install -y --no-install-recommends \
 	protobuf-compiler \
