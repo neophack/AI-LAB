@@ -58,8 +58,9 @@ RUN apt-get -qq update && apt-get -qq install -y --no-install-recommends \
 	xdg-utils \
 	snapd \
 	rsync \
-	llvm-9-dev \
 	&& rm -rf /var/lib/apt/lists/*
+
+RUN bash -c "$(wget -O - https://apt.llvm.org/llvm.sh)"
 
 RUN cd /usr/local/bin &&\
 	ln -s /usr/bin/python3 python
