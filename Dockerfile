@@ -73,7 +73,7 @@ RUN cd /usr/local/bin &&\
 
 #---------------Install pip package---------------
 RUN cd /usr/local/src \
-	&& wget -q  https://bootstrap.pypa.io/get-pip.py \
+	&& wget -q  https://bootstrap.pypa.io/3.5/get-pip.py \
 	&& python3 get-pip.py \
 	&& pip3 install --upgrade pip \
 	&& rm -f get-pip.py \
