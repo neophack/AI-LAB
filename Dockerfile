@@ -58,7 +58,7 @@ RUN apt-get -qq update && apt-get -qq install -y --no-install-recommends \
 	xdg-utils \
 	snapd \
 	rsync \
-	llvm-dev-10 \
+	llvm-10-dev \
 	&& rm -rf /var/lib/apt/lists/*
 
 RUN cd /usr/local/bin &&\
