@@ -21,6 +21,9 @@ RUN echo "deb http://apt.llvm.org/xenial/ llvm-toolchain-xenial main">>/etc/apt/
 RUN bash -c "wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key| apt-key add -" 
 RUN apt-get -qq update && apt-get -qq install -y --no-install-recommends llvm-8-dev
 
+RUN alias llvm-config="llvm-config-8"
+RUN export LLVM_CONFIG="/usr/bin/llvm-config-8"
+
 RUN apt-get -qq update && apt-get -qq install -y --no-install-recommends \
 	protobuf-compiler \
 	geany \
