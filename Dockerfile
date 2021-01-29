@@ -191,10 +191,8 @@ RUN pip3 install --no-cache-dir --requirement /tmp/requirements.txt
 
 #---------------Install mxnet-simpledet---------
 # download and intall pre-built wheel for CUDA 10.0
-RUN  \
-    # install pycocotools \
-    pip3 install --no-cache-dir cython && \
-    pip3 install --no-cache-dir 'git+https://github.com/RogerChern/cocoapi.git#subdirectory=PythonAPI' && \
+RUN pip3 install --no-cache-dir cython && \
+    pip3 install --no-cache-dir 'git+https://github.com/RogerChern/cocoapi.git#subdirectory=PythonAPI' 
 
 #---------------Add some envirenement variable-----------
 
