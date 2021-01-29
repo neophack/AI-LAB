@@ -191,12 +191,10 @@ RUN pip3 install --no-cache-dir --requirement /tmp/requirements.txt
 
 #---------------Install mxnet-simpledet---------
 # download and intall pre-built wheel for CUDA 10.0
-RUN pip3 install --no-cache-dir https://1dv.alarge.space/mxnet_cu100-1.6.0b20190820-py2.py3-none-manylinux1_x86_64.whl && \
+RUN  \
     # install pycocotools \
     pip3 install --no-cache-dir cython && \
     pip3 install --no-cache-dir 'git+https://github.com/RogerChern/cocoapi.git#subdirectory=PythonAPI' && \
-    # install mxnext, a wrapper around MXNet symbolic API \
-    pip3 install --no-cache-dir 'git+https://github.com/RogerChern/mxnext#egg=mxnext'
 
 #---------------Add some envirenement variable-----------
 
