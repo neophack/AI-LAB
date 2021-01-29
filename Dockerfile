@@ -15,11 +15,11 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone &
 
 RUN apt-get -qq update && apt-get install apt-transport-https 
 ##---------------install prerequisites---------------
-RUN echo "deb http://apt.llvm.org/xenial/ llvm-toolchain-xenial-10 main">>/etc/apt/sources.list \
-    && echo "deb-src http://apt.llvm.org/xenial/ llvm-toolchain-xenial-10 main">>/etc/apt/sources.list 
+RUN echo "deb http://apt.llvm.org/xenial/ llvm-toolchain-xenial main">>/etc/apt/sources.list \
+    && echo "deb-src http://apt.llvm.org/xenial/ llvm-toolchain-xenial main">>/etc/apt/sources.list 
 
 RUN bash -c "wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key| apt-key add -" 
-RUN apt-get -qq update && apt-get -qq install -y --no-install-recommends llvm-10-dev
+RUN apt-get -qq update && apt-get -qq install -y --no-install-recommends llvm-8-dev
 
 RUN apt-get -qq update && apt-get -qq install -y --no-install-recommends \
 	protobuf-compiler \
